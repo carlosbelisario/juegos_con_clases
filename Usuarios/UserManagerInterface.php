@@ -1,12 +1,12 @@
 <?php
-namespace JuegosConClase\User;
+//namespace JuegosConClase\User;
 
 /**
  *
  * interface que gestiona los métodos de los usuarios
  * @author Carlos Belisario <carlosbelisario.com>
  */
-interface UserManagerInterface 
+interface UserManagerInterface
 {
     /**
      * 
@@ -14,7 +14,7 @@ interface UserManagerInterface
      * method for add the user 
      * @param User $usuario
      */
-    public function addUser(User $usuario);
+    public function addUser(User $user);
     
     /**
      * 
@@ -53,7 +53,7 @@ interface UserManagerInterface
      * method to search for users by a standard criterion
      * @param Array $criterio
      */
-    public function findByUser(array $criterio);        
+    public function findUserBy(array $criterio);        
     
 }
 ?>

@@ -1,8 +1,10 @@
 <?php
-namespace JuegosConClase\User;
-//use JuegosConClase\User\UserManagerInterface as UI;
+//namespace JuegosConClase\User;
+require_once 'UserManagerInterface.php';
+require_once 'User.php';
 
 /**
+ * 
  * Class for the user manager
  *
  * @author Carlos Belisario <carlosbelisario.com>
@@ -22,12 +24,9 @@ class UserManager implements UserManagerInterface
     public function __construct(PDO $db)
     {
         $this->db = $db;
-    }    
+    }        
     
-    public function addUser(User $user) {        
-    }
-    
-    public function editUser(User $user)
+    public function editUser(User $user, $id)
     {        
     }
     
@@ -44,19 +43,20 @@ class UserManager implements UserManagerInterface
         //aca verificamos que el usuario haya escrito en un formato que comience con letras y pueda estar seguido de un punto, guion bajo o guion 
         if(preg_match("/(^[a-z]{1,20})(?!\s)([\w-\.]{0,20}$)/i",  $user->getUser())){            
             try {
-                $row = $this->findBy(
-                        array('user' => $user->getUsuario(),
-                              'password' => $user->getPassword())
-                );
+                $row = $this->findUserBy(
+                    array(
+                        'user' => $user->getUser(),
+                        'password' => $user->getPassword(),
+                 ));
                 //verificamos que el usuario exista en la base de datos y la password sea correcta
-                if(!empty($row)) {                                                                                  
-                    $user->setRol($row->rol);
+                if(!empty($row)) {                           
+                    $user->setRol($row[0]->rol);
                     /*podemos pasar el estatus para que se haga la verificacion
                     * e ingrese a una pagina para usuarios deshabilitados, 
                     * para darle motivos e incluso donde comunicarse, 
                     *                            
                     */                        
-                    $user->setEstatus($row->estatus);
+                    $user->setEstatus($row[0]->estatus);
                         
                     /* o podemos incluirlo en los errores, de manera que no haga login
                     if($row->estatus == "habilitado") {
@@ -69,7 +69,7 @@ class UserManager implements UserManagerInterface
                     $user->setError('errorLogin', 'El Usuario o la Contraseña no es Correcta');
                 }                
              } catch(Exception $e) {
-                 $e->getMessage();
+                echo "<pre>" . $e->getMessage() . "</pre>";
              }                     
         } else {
             $user->setError('erroFormato', 'Formato de usuario no permitido');
@@ -104,7 +104,7 @@ class UserManager implements UserManagerInterface
      */
     public function findUserBy(array $criterio)
     {
-        foreach($criterio as $K => $v) {
+        foreach($criterio as $k => $v) {
             $fields[] = "$k = ?";
             $values[] = $v;
         }
@@ -119,7 +119,15 @@ class UserManager implements UserManagerInterface
             echo "<pre>" . $e->getMessage() . "</pre>";
         }      
         return $rowUsuarios;
+    }    
+    public function addUser(User $user) {
+        try {
+            $validador = new ValidateUser($user);
+        } catch(Exception $e) {
+            
+        }
     }
+    
 }
 $userManager = new UserManager(new PDO('mysql:host=localhost; dbname=prueba', 'root', '123'));
 $user = new User();
