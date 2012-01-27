@@ -1,5 +1,5 @@
 <?php
-namespace Usuarios;
+namespace \Juegos_con_clase\Usuarios;
 
 /**
  *
