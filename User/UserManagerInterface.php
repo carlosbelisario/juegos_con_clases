@@ -1,5 +1,5 @@
 <?php
-//namespace JuegosConClase\User;
+namespace juegos_con_clase\User;
 
 /**
  *
@@ -56,4 +56,6 @@ interface UserManagerInterface
     public function findUserBy(array $criterio);        
     
 }
+
+
 ?>

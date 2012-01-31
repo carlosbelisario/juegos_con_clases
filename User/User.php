@@ -1,5 +1,5 @@
 <?php
-//namespace JuegosConClase\User;
+namespace juegos_con_clase\User;
 /**
  * 
  * class User for the data of the user
