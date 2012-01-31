@@ -232,8 +232,14 @@ class UserManager implements UserManagerInterface
     }
     
 }
-$pdo = new PDO('mysql:host=localhost; dbname=prueba', 'root', '123');
+/*
+pruebas realizadas sobre las clases, solo back-end el front-end son formularios sencillos
+test of the class, only back-end 
+ 
+  $pdo = new PDO('mysql:host=localhost; dbname=prueba', 'root', '123');
+ 
 $userManager = new UserManager($pdo);
+ 
 $user = new User();
 $user->setUser('carlos');
 $user->setPassword('123456');
@@ -245,5 +251,7 @@ $l = $userManager->editUser($user, 'carlos');
 echo $l->__toString();
 /*echo "<pre>";
 var_dump($login);
-echo "</pre>";*/
+
+ * echo "</pre>";
+ */
 ?>
