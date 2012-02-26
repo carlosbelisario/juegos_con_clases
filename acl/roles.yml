@@ -1,0 +1,9 @@
+admin:
+  rol:
+    insert
+    update
+    delete
+    read
+user:
+  rol:
+    read

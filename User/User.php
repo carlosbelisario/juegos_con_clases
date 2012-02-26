@@ -44,6 +44,8 @@ class User
      * @var String $error
      */
     private $error;
+    
+    public static $logged = false;
 
 
     /**

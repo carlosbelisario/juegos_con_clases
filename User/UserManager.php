@@ -125,6 +125,7 @@ class UserManager implements UserManagerInterface
                 ));
                 //verificamos que el usuario exista en la base de datos y la password sea correcta
                if(!empty($row)) {                           
+                   User::$logged = true;
                    $user->setRol($row[0]->rol);
                         /*podemos pasar el estatus para que se haga la verificacion
                         * e ingrese a una pagina para usuarios deshabilitados, 
